@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "9-2-practise"
+version = "0.1.0"
+description = ""
+authors = ["Kalyuzhnyy Dmitry <difrom_pro@mail.ru>"]
+readme = "README.md"
+packages = [{include = "9"}]
+
+[tool.poetry.dependencies]
+python = "^3.14"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
