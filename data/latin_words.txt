@@ -26,3 +26,5 @@ Jacob
 Mia
 Noah
 Anthony
+Elena
+Patrick

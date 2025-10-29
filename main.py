@@ -13,7 +13,6 @@ def filter_name_from_txt(file_name):
         list_txt = f.readlines()
 
     new_name_list = []
-    signs = ".,!? \n@#№;:(){}[]"
     # new_name = ""
     # Проверяем слово на лишние символы и удаляем их.
     for name in list_txt:
@@ -24,28 +23,31 @@ def filter_name_from_txt(file_name):
 
 
 def is_cirillic(name_item: str) -> bool:
-    return bool(re.search('[а-яА-Я]', name_item))
-
-def is_latin(name_item: str) -> bool:
-    return bool(re.search('[a-zA-Z]', name_item))
+    """Проверяем есть ли кириллица в слове"""
+    return bool(re.search("[а-яА-Я]", name_item))
 
 
 def filter_russian_names(names_list: list[str]) -> list[str]:
+    """ "Фильтруем русские слова из списка"""
     new_list = []
     for name in names_list:
         if is_cirillic(name):
             new_list.append(name)
     return new_list
 
+
 def filter_latin_names(names_list: list[str]) -> list[str]:
+    """ "Фильтруем английские слова из списка"""
     new_list = []
     for name in names_list:
-        if is_latin(name):
+        if not is_cirillic(name):
             new_list.append(name)
     return new_list
 
+
 def save_to_file(file_name: str, data: str) -> None:
-    with open('data/'+file_name, "w", encoding="utf-8") as names_file:
+    """ "Сохраняем список в файл"""
+    with open("data/" + file_name, "w", encoding="utf-8") as names_file:
         names_file.write(data)
 
 
@@ -54,7 +56,7 @@ if __name__ == "__main__":
     for i in filtered_list_names:
         print(i)
 
-    save_to_file("russian_words.txt",
-                 "\n".join(filter_russian_names(filtered_list_names)))
-    save_to_file("latin_words.txt",
-                 "\n".join(filter_latin_names(filtered_list_names)))
+    save_to_file(
+        "russian_words.txt", "\n".join(filter_russian_names(filtered_list_names))
+    )
+    save_to_file("latin_words.txt", "\n".join(filter_latin_names(filtered_list_names)))
